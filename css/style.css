@@ -16,7 +16,6 @@
 }
 
 body {
-    background-color: black; 
     background: linear-gradient(to right, rgb(26, 12, 12), black, rgb(18, 14, 35));
     color: white;
 
@@ -55,7 +54,7 @@ aside {
     min-width: 100vw;
     min-width: 100vw;
 
-    background-color: black; 
+    background: linear-gradient(to right, rgb(26, 12, 12), black, rgb(18, 14, 35));
 
     display: grid;
     grid-template: 7rem 1fr 0/ 3fr 22fr;
@@ -64,15 +63,18 @@ aside {
 h1 {
     color: white;
     font-size: 3rem;
+    text-transform: uppercase;
 }
 
 h2 {
     color: #fbcc28;
     font-size: 2rem;
+    text-transform: uppercase;
 }
 
 h3 {
     margin: 1rem 0;
+    text-transform: uppercase;
 }
 
 .solar-system {
@@ -167,8 +169,8 @@ h3 {
 }
 
 .inner-layer {
+    height: calc(1276vh / 9);
     opacity: 1;
-    margin: 2rem;
     z-index: 3;
 }
 
@@ -203,12 +205,3 @@ h3 {
     background-color: rgba(255, 255, 255, 0.621);
     border-radius: 1px;
 }
-
-
-
-
-216 1184
-108 592
-54  296
-27  198
-3   22 

@@ -25,18 +25,36 @@ const displayPlanetData = (planetData) => {
 
     displayElements.description.textContent = planetData.desc
 
-    displayElements.circumference.textContent = planetData.circumference
-    displayElements.distance.textContent = planetData.distance
+    const circString = stringifyBigNumber(planetData.circumference) + ' km'
+    const distString = stringifyBigNumber(planetData.distance) + ' km'
 
-    displayElements.maxTemp.textContent = planetData.temp.day
-    displayElements.minTemp.textContent = planetData.temp.night  
+    displayElements.circumference.textContent = circString
+    displayElements.distance.textContent = distString
+
+    displayElements.maxTemp.textContent = planetData.temp.day + ' °C'
+    displayElements.minTemp.textContent = planetData.temp.night + ' °C' 
+
+    displayElements.moonList.innerHTML = ''
+
+    //Adding moon data is a bit more complex, partially because the data is not a string but an array that needs to be turned in to list items
+    //Also because SOME astral bodies (*cough* saturn *cough*) apparently have 3 moons named Titan, so would you look at that...
+    //Aka we need to check for doubles and make sure they aren't entered multiple times
+
+    let displayedMoons = []
 
     for (const moon of planetData.moons) {
-        
+        if (displayedMoons.includes(moon)) {
+            console.log(`Detected double: multiple items contain ${moon}`)
+            continue //Skips current iteration
+        }
+
         const newListItem = document.createElement('li')
         newListItem.textContent = moon
 
         displayElements.moonList.appendChild(newListItem)
+   
+        displayedMoons.push(moon)
+   
     }
 
     
@@ -49,6 +67,22 @@ const displayPlanetData = (planetData) => {
 
 
     showOverlay()
+}
+
+const stringifyBigNumber = (number) => {
+    let returnString = ''
+
+    const numberString = number.toString()
+
+    for (let i = 0; i < numberString.length; i++) {
+        returnString += numberString[i]
+
+        if ((numberString.length - i)%3 == 1 && numberString.length - i != 1) {
+            returnString += ' '
+        } 
+    }
+
+    return returnString
 }
 
 const setPlanetSizes = async() => {
