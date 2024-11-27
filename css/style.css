@@ -1,0 +1,214 @@
+:root {
+    --merkurius:#8c8a84;
+    --venus:#e6cdcc;
+    --jorden:#418ed4;
+    --mars:#ef5f5f;
+    --jupiter:#e29468;
+    --saturnus:#c7aa72;
+    --uranus:#c9d4f1;
+    --neptunus:#7a91a7;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black; 
+    background: linear-gradient(to right, rgb(26, 12, 12), black, rgb(18, 14, 35));
+    color: white;
+
+    margin: 0;
+    min-height: 100vh;
+    min-width: 100vw;
+
+    display: grid;
+    grid-template: 7rem 1fr 7rem / 3fr 22fr;
+}
+
+header {
+    grid-column-start: 2;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+aside {
+    grid-row: 1 / span 3;
+
+    min-width: 10rem;
+    height: 100vw;
+
+    display: flex;
+    justify-content: flex-end;
+    overflow: hidden hidden;
+}
+
+.pl-overlay {
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    min-width: 100vw;
+    min-width: 100vw;
+
+    background-color: black; 
+
+    display: grid;
+    grid-template: 7rem 1fr 0/ 3fr 22fr;
+}
+
+h1 {
+    color: white;
+    font-size: 3rem;
+}
+
+h2 {
+    color: #fbcc28;
+    font-size: 2rem;
+}
+
+h3 {
+    margin: 1rem 0;
+}
+
+.solar-system {
+    display: flex;
+    align-items: center;
+    padding: 5%;
+    gap: 5%;
+
+}
+
+.planet {
+    border-radius: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+.mercury {
+    background-color: var(--merkurius);
+}
+
+.venus {
+    background-color: var(--venus);
+}
+
+.earth {
+    background-color: var(--jorden);
+}
+
+.mars {
+    background-color: var(--mars);
+}
+
+.jupiter {
+    background-color: var(--jupiter);
+}
+
+.saturn {
+    background-color: var(--saturnus);
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+.saturn-ring {
+    background-color: beige;
+    height: 3%;
+    width: 150%;
+    border-radius: 100%;
+    transform: rotate(-30deg);
+}
+
+.uranus {
+    background-color: var(--uranus);
+}
+
+.neptune {
+    background-color: var(--neptunus);
+}
+
+.sun-slice, .planet-slice {
+    aspect-ratio: 1 / 1;
+    border-radius: 100%;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template: 100% / 100%;
+}
+
+.slice-layer {
+    grid-area: 1 / 1 / span 1 / span 1;
+
+    aspect-ratio: 1/1;
+
+    display: grid;
+    grid-template: 100% / 100%;
+
+    border-radius: 100%;
+}
+
+.sun-slice .slice-layer {
+    background-color: #ffd129;
+}
+
+.outer-layer {
+    height: calc(1404vh / 9);
+    opacity: 0.5;
+    z-index: 1;
+}
+
+.middle-layer {
+    height: calc(1340vh / 9);
+    opacity: 0.75;
+    z-index: 2;
+}
+
+.inner-layer {
+    opacity: 1;
+    margin: 2rem;
+    z-index: 3;
+}
+
+
+.hidden {
+    display: none;
+}
+
+
+.pl-main {
+    padding: 0 10%;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.pl-stat-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template: 1fr 1fr / auto auto;
+}
+
+.pl-moon-list {
+    list-style: circle;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.line {
+    height: 2px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.621);
+    border-radius: 1px;
+}
+
+
+
+
+216 1184
+108 592
+54  296
+27  198
+3   22 
