@@ -8,113 +8,104 @@
     <link rel="stylesheet" href="css/style.css">
     <script type="module" src="js/main.js" defer></script>
 </head>
-<body>
+<body class="mainpage">
     
-    <header>
+    <header class="mainpage__header">
 
-        <h1 class="mainpage-title">Solsystemet</h1>
+        <h1 class="mainpage__title">Solsystemet</h1>
 
-        <h2 class="mainpage-subtitle">Solaris</h2>
+        <h2 class="mainpage__subtitle">Solaris</h2>
 
     </header>
 
     <main class="solar-system">
 
-        <figure name="Merkurius" class="planet mercury"></figure>
+        <figure name="Merkurius" class="solar-system__planet mercury"></figure>
 
-        <figure name="Venus" class="planet venus"></figure>
+        <figure name="Venus" class="solar-system__planet venus"></figure>
 
-        <figure name="Jorden" class="planet earth"></figure>
+        <figure name="Jorden" class="solar-system__planet earth"></figure>
         
-        <figure name="Mars" class="planet mars"></figure>
+        <figure name="Mars" class="solar-system__planet mars"></figure>
 
-        <figure name="Jupiter" class="planet jupiter"></figure>
+        <figure name="Jupiter" class="solar-system__planet jupiter"></figure>
 
-        <figure name="Saturnus" class="planet saturn">
+        <figure name="Saturnus" class="solar-system__planet saturn">
             <div class="saturn-ring"></div>
         </figure>
 
-        <figure name="Uranus" class="planet uranus"></figure>
+        <figure name="Uranus" class="solar-system__planet uranus"></figure>
 
-        <figure name="Neptunus" class="planet neptune"></figure>
+        <figure name="Neptunus" class="solar-system__planet neptune"></figure>
         
     </main>
 
-    <aside>
+    <aside class="aside-left">
 
-        <figure class="sun-slice">
-
-            <div class="slice-layer outer-layer sun"></div>
-            <div class="slice-layer middle-layer sun"></div>
-            <div class="slice-layer inner-layer sun"></div>
-
-        </figure>
+        <figure class="sun-slice"></figure>
 
     </aside>
 
-    <article class="pl-overlay hidden">
+    <section class="overlay hidden">
 
-        <header class="pl-header">
+        <header class="overlay__header">
 
-            <h1 class="pl-name"></h1>
+            <h1 class="overlay__title"></h1>
 
-            <h2 class="pl-latin-name"></h2>
+            <h2 class="overlay__subtitle"></h2>
 
         </header>
 
-        <section class="pl-main">
+        <section>
 
-            <section class="pl-intro">
+            <p class="overlay__pl-desc"></p>
 
-                <p class="pl-desc"></p>
-
-            </section>
-
-            <figure class="line"></figure>
-
-            <section class="pl-stat-grid">
-
-                <section>
-                    <h3>Omkrets</h3>
-                    <p class="pl-circ"></p>
-                </section>
-
-                <section>
-                    <h3>Km från Solen</h3>
-                    <p class="pl-distance"></p>
-                </section>
-
-                <section>
-                    <h3>Max temperatur</h3>
-                    <p class="pl-max-temp"></p>
-                </section>
-
-                <section>
-                    <h3>Min temperatur</h3>
-                    <p class="pl-min-temp"></p>
-                </section>
-
-            </section>
-
-            <figure class="line"></figure>
-
-            <section>
-                    <h3>Månar</h3>
-                    <ul class="pl-moon-list"></ul>
-            </section>
         </section>
 
-        <aside>
+        <figure class="line"></figure>
 
-            <figure class="planet-slice">
+        <section class="overlay__stat-grid">
+
+            <section>
+                <h3 class="overlay__section-title">Omkrets</h3>
+                <p class="overlay__pl-circ"></p>
+            </section>
+
+            <section>
+                <h3 class="overlay__section-title">Km från Solen</h3>
+                <p class="overlay__pl-distance"></p>
+            </section>
+
+            <section>
+                <h3 class="overlay__section-title">Max temperatur</h3>
+                <p class="overlay__pl-max-temp"></p>
+            </section>
+
+            <section>
+                <h3 class="overlay__section-title">Min temperatur</h3>
+                <p class="overlay__pl-min-temp"></p>
+            </section>
+
+        </section>
+
+        <figure class="overlay__line"></figure>
+
+        <section class="overlay__moons">
+                <h3 class="overlay__section-title">Månar</h3>
+                <ul class="overlay__pl-moons-list"></ul>
+        </section>
+
+        <aside class="aside-left">
+
+            <figure class="pl-slice">
     
-                <div class="slice-layer outer-layer"></div>
-                <div class="slice-layer middle-layer"></div>
-                <div class="slice-layer inner-layer"></div>
+                <div class="pl-slice__layer pl-slice__layer--outer"></div>
+                <div class="pl-slice__layer pl-slice__layer--middle"></div>
+                <div class="pl-slice__layer pl-slice__layer--inner"></div>
     
             </figure>
     
         </aside>
-    </div>
+    </section>
 </body>
 </html>

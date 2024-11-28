@@ -1,4 +1,5 @@
 :root {
+    /*Planetary colors named in swedish for easy access from api-fetched name -> color variable*/
     --merkurius:#8c8a84;
     --venus:#e6cdcc;
     --jorden:#418ed4;
@@ -7,6 +8,13 @@
     --saturnus:#c7aa72;
     --uranus:#c9d4f1;
     --neptunus:#7a91a7;
+    --solen: #ffd129;
+
+    --slice-width: 10vw;
+    --header-height: 7rem;
+
+    --background: linear-gradient(to left, rgb(33, 14, 40), rgb(10, 9, 36), rgb(10, 22, 65));;
+
 }
 
 * {
@@ -15,108 +23,73 @@
     box-sizing: border-box;
 }
 
-body {
-    background: linear-gradient(to right, rgb(26, 12, 12), black, rgb(18, 14, 35));
+html {
+    background: var(--background);
+    color: white;
+}
+
+body {    
     color: white;
 
     margin: 0;
+    margin-left: var(--slice-width);
+    width: calc(100vw - var(--slice-width));
     min-height: 100vh;
-    min-width: 100vw;
-
-    display: grid;
-    grid-template: 7rem 1fr 7rem / 3fr 22fr;
-}
-
-header {
-    grid-column-start: 2;
 
     display: flex;
     flex-direction: column;
+    padding: 5rem 2rem;
+    gap: 2rem;
+}
+
+.mainpage__header {
+    height: var(--header-height);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
     align-items: flex-end;
 }
 
-aside {
-    grid-row: 1 / span 3;
-
-    min-width: 10rem;
-    height: 100vw;
-
-    display: flex;
-    justify-content: flex-end;
-    overflow: hidden hidden;
-}
-
-.pl-overlay {
-    position: absolute;
-    z-index: 1000;
-    top: 0;
-    left: 0;
-    min-width: 100vw;
-    min-width: 100vw;
-
-    background: linear-gradient(to right, rgb(26, 12, 12), black, rgb(18, 14, 35));
-
-    display: grid;
-    grid-template: 7rem 1fr 0/ 3fr 22fr;
-}
-
-h1 {
-    color: white;
+.mainpage__title, .overlay__title {
     font-size: 3rem;
     text-transform: uppercase;
+    font-family: Helvetica, sans-serif;
+    letter-spacing: 0.5rem;
 }
 
-h2 {
-    color: #fbcc28;
-    font-size: 2rem;
+.mainpage__subtitle, .overlay__subtitle {
+    color: var(--solen);
+    font-size: 1.5rem;
     text-transform: uppercase;
-}
-
-h3 {
-    margin: 1rem 0;
-    text-transform: uppercase;
+    font-weight: 100;
+    letter-spacing: 0.7rem;
 }
 
 .solar-system {
+    flex: 1;
+    margin-bottom: var(--header-height);
     display: flex;
     align-items: center;
-    padding: 5%;
     gap: 5%;
-
 }
 
-.planet {
-    border-radius: 100%;
-    aspect-ratio: 1 / 1;
-}
+/*setting color of all the solar system's planets*/
+.mercury {background-color: var(--merkurius);}
+.venus {background-color: var(--venus);}
+.earth {background-color: var(--jorden);}
+.mars {background-color: var(--mars);}
+.jupiter {background-color: var(--jupiter);}
+.saturn {background-color: var(--saturnus);}
+.uranus {background-color: var(--uranus);}
+.neptune {background-color: var(--neptunus);}
 
-.mercury {
-    background-color: var(--merkurius);
-}
-
-.venus {
-    background-color: var(--venus);
-}
-
-.earth {
-    background-color: var(--jorden);
-}
-
-.mars {
-    background-color: var(--mars);
-}
-
-.jupiter {
-    background-color: var(--jupiter);
-}
-
-.saturn {
-    background-color: var(--saturnus);
+.saturn{
     display: grid;
     justify-items: center;
     align-items: center;
 }
-.saturn-ring {
+.saturn__ring {
     background-color: beige;
     height: 3%;
     width: 150%;
@@ -124,84 +97,120 @@ h3 {
     transform: rotate(-30deg);
 }
 
-.uranus {
-    background-color: var(--uranus);
-}
-
-.neptune {
-    background-color: var(--neptunus);
-}
-
-.sun-slice, .planet-slice {
+/*Making all circular objects circular*/
+.solar-system__planet, .sun-slice, .sun-slice__layer, .pl-slice, .pl-slice__layer {
+    border-radius: 100%;
     aspect-ratio: 1 / 1;
-    border-radius: 100%;
-    display: grid;
+}
+
+
+.aside-left {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: var(--slice-width);
+
+    display: flex;
     align-items: center;
-    justify-items: center;
-    grid-template: 100% / 100%;
+    justify-content: flex-end;
+    overflow: hidden;
 }
 
-.slice-layer {
-    grid-area: 1 / 1 / span 1 / span 1;
+.sun-slice {
+    height: 200vh;
+    background-color: var(--solen);
+}
 
-    aspect-ratio: 1/1;
+
+
+.overlay__line {
+    height: 2px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.621);
+    border-radius: 1px;
+}
+
+.overlay {
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    min-width: 100vw;
+    width: 100vw;
+
+    background: var(--background);
 
     display: grid;
-    grid-template: 100% / 100%;
-
-    border-radius: 100%;
+    grid-template: 7rem 1fr 0/ 3fr 22fr;
 }
 
-.sun-slice .slice-layer {
-    background-color: #ffd129;
-}
-
-.outer-layer {
-    height: calc(1404vh / 9);
-    opacity: 0.5;
-    z-index: 1;
-}
-
-.middle-layer {
-    height: calc(1340vh / 9);
-    opacity: 0.75;
-    z-index: 2;
-}
-
-.inner-layer {
-    height: calc(1276vh / 9);
-    opacity: 1;
-    z-index: 3;
-}
-
-
-.hidden {
-    display: none;
-}
-
-
-.pl-main {
-    padding: 0 10%;
+.overlay__header {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    align-items: flex-start;
 }
 
-.pl-stat-grid {
+.overlay__section-title {
+    margin: 1rem 0;
+    text-transform: uppercase;
+}
+
+.overlay__stat-grid {
     display: grid;
     gap: 1rem;
     grid-template: 1fr 1fr / auto auto;
 }
 
-.pl-moon-list {
+.pl-moons__list {
     list-style: circle;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
 
-.line {
-    height: 2px;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.621);
-    border-radius: 1px;
+
+
+
+
+
+
+.pl-slice {
+    height: fit-content;
+    display: grid;
+    grid-template: 100% / 100%;
+    align-items: center;
+    justify-items: center;
+}
+
+.pl-slice__layer {
+    grid-area: 1 / 1 / span 1 / span 1;
+
+    display: grid;
+    grid-template: 100% / 100%;
+
+    border-radius: 100%;
+}
+
+.pl-slice__layer--outer {
+    height: calc(2* 1404vh / 9);
+    opacity: 0.5;
+    z-index: 1;
+}
+
+.pl-slice__layer--middle {
+    height: calc(2* 1340vh / 9);
+    opacity: 0.75;
+    z-index: 2;
+}
+
+.pl-slice__layer--inner {
+    height: calc(2* 1276vh / 9);
+    opacity: 1;
+    z-index: 3;
+}
+
+
+
+.hidden {
+    display: none;
 }
