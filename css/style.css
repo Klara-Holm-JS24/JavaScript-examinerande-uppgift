@@ -14,7 +14,30 @@
     --planet-aside-width: 20vw;
     --header-height: 7rem;
 
-    --background: linear-gradient(to left, rgb(33, 14, 40), rgb(10, 9, 36), rgb(10, 22, 65));;
+    --background: 
+        radial-gradient(circle at 4% 11%, rgba(255, 255, 255, 0.658) 2px, transparent 4px),
+        radial-gradient(circle at 16% 81%, rgba(255, 255, 255, 0.463) 1px, transparent 3px),
+        radial-gradient(circle at 24% 29%, rgba(255, 244, 196, 0.89) 1.5px, transparent 4px),
+        radial-gradient(circle at 41% 22%, rgba(255, 255, 255, 0.658) 2px, transparent 3px),
+        radial-gradient(circle at 53% 64%, rgba(255, 255, 255, 0.658) 1px, transparent 4px),
+        radial-gradient(circle at 70% 10%, rgba(255, 255, 255, 0.658) 1.5px, transparent 3px),
+        radial-gradient(circle at 85% 50%, rgba(255, 255, 255, 0.658) 2px, transparent 4px),
+        radial-gradient(circle at 95% 25%, rgba(255, 255, 255, 0.658) 1.5px, transparent 3px),
+        radial-gradient(circle at 10% 45%, rgba(255, 255, 255, 0.658) 1px, transparent 4px),
+        radial-gradient(circle at 20% 70%, rgba(255, 255, 255, 0.658) 2px, transparent 3px),
+        radial-gradient(circle at 35% 85%, rgba(255, 255, 255, 0.658) 1.5px, transparent 4px),
+        radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.658) 2px, transparent 3px),
+        radial-gradient(circle at 65% 75%, rgba(255, 255, 255, 0.658) 1px, transparent 4px),
+        radial-gradient(circle at 75% 35%, rgba(255, 255, 255, 0.658) 2px, transparent 3px),
+        radial-gradient(circle at 90% 15%, rgba(255, 255, 255, 0.658) 2.5px, transparent 4px),
+        radial-gradient(circle at 8% 90%, rgba(255, 255, 255, 0.658) 3.5px, transparent 3px),
+        radial-gradient(circle at 18% 55%, rgba(255, 255, 255, 0.658) 1px, transparent 4px),
+        radial-gradient(circle at 55% 40%, rgba(255, 235, 235, 0.934) 1.5px, transparent 3px),
+        radial-gradient(circle at 78% 65%, rgba(255, 255, 255, 0.658) 2px, transparent 4px),
+        radial-gradient(circle at 92% 5%, rgba(255, 255, 255, 0.658) 2.5px, transparent 3px),
+
+        linear-gradient(to left, rgb(33, 14, 40), rgb(10, 9, 36), rgb(10, 22, 65))
+    ;
 
 }
 
@@ -27,6 +50,10 @@
 html {
     background: var(--background);
     color: white;
+
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 18px;
+    font-weight: 200;
 }
 
 body {    
@@ -55,16 +82,19 @@ body {
 .mainpage__title, .overlay__title {
     font-size: 3rem;
     text-transform: uppercase;
-    font-family: Helvetica, sans-serif;
-    letter-spacing: 0.5rem;
+    font-family: "Secular One" , Helvetica, sans-serif;
+    letter-spacing: 0.3rem;
 }
 
 .mainpage__subtitle, .overlay__subtitle {
     color: var(--solen);
+    font-family: "Lora", sans-serif;
     font-size: 1.5rem;
     text-transform: uppercase;
     font-weight: 100;
     letter-spacing: 0.7rem;
+
+    margin-bottom: 1rem;
 }
 
 .solar-system {
@@ -99,7 +129,7 @@ body {
 }
 
 /*Making all circular objects circular*/
-.solar-system__planet, .sun-slice, .sun-slice__layer, .pl-slice, .pl-slice__layer {
+.solar-system__planet, .sun-slice, .pl-slice, .pl-slice__layer {
     border-radius: 100%;
     aspect-ratio: 1 / 1;
 }
@@ -111,10 +141,10 @@ body {
     left: 0;
     height: 100vh;
 
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    overflow: hidden;
 }
 
 .mainpage__aside {
@@ -133,12 +163,12 @@ body {
     z-index: 1000;
     top: 0;
     left: 0;
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
 
     background: var(--background);
 
-    padding: 5rem 20%;
+    padding: 5rem calc(3rem + var(--planet-aside-width));
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -158,8 +188,10 @@ body {
 }
 
 .overlay__section-title {
+    font-family: "Secular One", Helvetica, sans-serif;
     margin: 1rem 0;
     text-transform: uppercase;
+    letter-spacing: 0.15rem;
 }
 
 .overlay__stat-grid {
@@ -168,33 +200,27 @@ body {
     grid-template: 1fr 1fr / auto auto;
 }
 
-.pl-moons__list {
+.overlay__moons-list {
+    padding-left: 1rem;
+
     list-style: circle;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-auto-flow: row;
 }
 
-
-
-
-
-
+.overlay__aside {
+    width: var(--planet-aside-width);
+}
 
 .pl-slice {
-    height: fit-content;
     display: grid;
     grid-template: 100% / 100%;
-    align-items: center;
-    justify-items: center;
 }
 
 .pl-slice__layer {
     grid-area: 1 / 1 / span 1 / span 1;
-
-    display: grid;
-    grid-template: 100% / 100%;
-
-    border-radius: 100%;
+    place-self: center;
 }
 
 .pl-slice__layer--outer {
