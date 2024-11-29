@@ -1,6 +1,7 @@
 //Module containing all DOM elements that we at any point access in our js
 
 const planetFigures = document.querySelectorAll('.solar-system__planet')
+const sunSlice = document.querySelector('.sun-slice')
 
 //
 const overlay = {
@@ -23,4 +24,4 @@ const planetSlices = {
 
 
 
-export {planetFigures, overlay, planetSlices}
+export {planetFigures, sunSlice, overlay, planetSlices}

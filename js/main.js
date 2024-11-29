@@ -1,7 +1,7 @@
 //Main js module
 
 import {getPlanet} from "./apiRequests.js"
-import {overlay, planetFigures} from "./domElements.js";
+import {overlay, planetFigures, sunSlice} from "./domElements.js";
 import {displayPlanetData, hideOverlay, setPlanetSizes} from "./domManipulation.js";
 
 
@@ -19,6 +19,11 @@ for (const planet of planetFigures) {
         
     })
 }
+
+sunSlice.addEventListener('click', async() => {
+    const sunData = await getPlanet('Solen')
+    displayPlanetData(sunData)
+})
 
 
 overlay.modal.addEventListener('click', () => {
