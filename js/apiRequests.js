@@ -22,7 +22,6 @@ const getApiKey = async() => {
 }
 
 const apiKey = await getApiKey()
-console.log(apiKey);
 
 
 export const getSolarSystem = async() => {
@@ -41,4 +40,10 @@ export const getSolarSystem = async() => {
     } catch (error) {
         console.log(error)
     }
+}
+
+export const getPlanet = async(name) => {
+    const solarSystem = await getSolarSystem()
+    console.log(solarSystem)
+    return solarSystem.find(planet => planet.name === name)
 }

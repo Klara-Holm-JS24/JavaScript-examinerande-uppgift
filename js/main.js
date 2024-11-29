@@ -1,31 +1,26 @@
-//Main js module, contains all code in which 
+//Main js module
 
-import {getSolarSystem} from "./apiRequests.js"
+import {getPlanet} from "./apiRequests.js"
+import {overlay, planetFigures} from "./domElements.js";
 import {displayPlanetData, hideOverlay, setPlanetSizes} from "./domManipulation.js";
 
-const planetElements = document.querySelectorAll('.planet')
-const infoOverlay = document.querySelector('.pl-overlay') 
 
 
+setPlanetSizes()
 
-const getPlanet = async(name) => {
-    const solarSystem = await getSolarSystem()
-    return solarSystem.find(planet => planet.name === name)
-}
 
-await setPlanetSizes()
-
-infoOverlay.addEventListener('click', () => {
-    hideOverlay()
-})
-
-for (const planet of planetElements) {
+for (const planet of planetFigures) {
     planet.addEventListener('click', async() => {
 
-        const planetName = planet.getAttribute('name')
+        const planetName = planet.getAttribute('alt')
         const planetData = await getPlanet(planetName)
 
         displayPlanetData(planetData)
         
     })
 }
+
+
+overlay.modal.addEventListener('click', () => {
+    hideOverlay()
+})
