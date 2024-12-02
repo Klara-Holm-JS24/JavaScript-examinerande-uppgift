@@ -1,19 +1,21 @@
 :root {
-    /*Planetary colors named in swedish for easy access from api-fetched name -> color variable*/
-    --merkurius:#8c8a84;
+    /*Color variables for each space object */
+    --sun: #ffd129;
+    --mercury:#8c8a84;
     --venus:#e6cdcc;
-    --jorden:#418ed4;
+    --earth:#418ed4;
     --mars:#ef5f5f;
     --jupiter:#e29468;
-    --saturnus:#c7aa72;
+    --saturn:#c7aa72;
     --uranus:#c9d4f1;
-    --neptunus:#7a91a7;
-    --solen: #ffd129;
+    --neptune:#7a91a7;
 
+    /*Self explanatory I hope*/
     --main-aside-width: 7vw;
-    --planet-aside-width: 20vw;
+    --overlay-aside-width: 15vw;
     --header-height: 7rem;
 
+    /*Background with stars over */
     --background: 
         radial-gradient(circle at 4% 11%, rgba(255, 255, 255, 0.658) 2px, transparent 4px),
         radial-gradient(circle at 16% 81%, rgba(255, 255, 255, 0.463) 1px, transparent 3px),
@@ -38,7 +40,6 @@
 
         linear-gradient(to left, rgb(33, 14, 40), rgb(10, 9, 36), rgb(10, 22, 65))
     ;
-
 }
 
 * {
@@ -87,7 +88,7 @@ body {
 }
 
 .mainpage__subtitle, .overlay__subtitle {
-    color: var(--solen);
+    color: var(--sun);
     font-family: "Lora", sans-serif;
     font-size: 1.5rem;
     text-transform: uppercase;
@@ -106,21 +107,21 @@ body {
 }
 
 /*setting color of all the solar system's planets*/
-.mercury {background-color: var(--merkurius);}
-.venus {background-color: var(--venus);}
-.earth {background-color: var(--jorden);}
-.mars {background-color: var(--mars);}
-.jupiter {background-color: var(--jupiter);}
-.saturn {background-color: var(--saturnus);}
-.uranus {background-color: var(--uranus);}
-.neptune {background-color: var(--neptunus);}
+.solar-system__planet--mercury {background-color: var(--mercury);}
+.solar-system__planet--venus {background-color: var(--venus);}
+.solar-system__planet--earth {background-color: var(--earth);}
+.solar-system__planet--mars {background-color: var(--mars);}
+.solar-system__planet--jupiter {background-color: var(--jupiter);}
+.solar-system__planet--saturn {background-color: var(--saturn);}
+.solar-system__planet--uranus {background-color: var(--uranus);}
+.solar-system__planet--neptune {background-color: var(--neptune);}
 
-.saturn{
+.solar-system__planet--saturn{
     display: grid;
     justify-items: center;
     align-items: center;
 }
-.saturn__ring {
+.solar-system__planet--saturn-ring {
     background-color: beige;
     height: 3%;
     width: 150%;
@@ -153,7 +154,7 @@ body {
 
 .sun-slice {
     height: 200vh;
-    background-color: var(--solen);
+    background-color: var(--sun);
 }
 
 
@@ -168,7 +169,7 @@ body {
 
     background: var(--background);
 
-    padding: 5rem calc(3rem + var(--planet-aside-width));
+    padding: 5rem calc(3rem + var(--overlay-aside-width));
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -201,16 +202,16 @@ body {
 }
 
 .overlay__moons-list {
-    padding-left: 1rem;
+    list-style: none;
 
-    list-style: circle;
     display: grid;
+    gap: 0.5rem;
     grid-template-columns: repeat(3, 1fr);
     grid-auto-flow: row;
 }
 
 .overlay__aside {
-    width: var(--planet-aside-width);
+    width: var(--overlay-aside-width);
 }
 
 .pl-slice {
@@ -224,19 +225,19 @@ body {
 }
 
 .pl-slice__layer--outer {
-    height: calc(2* 1404vh / 9);
+    height: calc(200vh);
     opacity: 0.5;
     z-index: 1001;
 }
 
 .pl-slice__layer--middle {
-    height: calc(2* 1340vh / 9);
+    height: calc(190vh);
     opacity: 0.75;
     z-index: 1002;
 }
 
 .pl-slice__layer--inner {
-    height: calc(2* 1276vh / 9);
+    height: calc(180vh);
     opacity: 1;
     z-index: 1003;
 }
