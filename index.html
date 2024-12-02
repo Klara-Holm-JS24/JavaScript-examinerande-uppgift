@@ -17,31 +17,36 @@
     
     <header class="mainpage__header">
 
+
         <h1 class="mainpage__title">Solsystemet</h1>
 
         <h2 class="mainpage__subtitle">Solaris</h2>
+
 
     </header>
 
     <main class="solar-system">
 
-        <figure alt="Merkurius" class="solar-system__planet mercury"></figure>
+        <!--alt attributes serving the double purpose of semantic -->
 
-        <figure alt="Venus" class="solar-system__planet venus"></figure>
+        <figure alt="Merkurius" class="solar-system__planet solar-system__planet--mercury"></figure>
 
-        <figure alt="Jorden" class="solar-system__planet earth"></figure>
+        <figure alt="Venus" class="solar-system__planet solar-system__planet--venus"></figure>
+
+        <figure alt="Jorden" class="solar-system__planet solar-system__planet--earth"></figure>
         
-        <figure alt="Mars" class="solar-system__planet mars"></figure>
+        <figure alt="Mars" class="solar-system__planet solar-system__planet--mars"></figure>
 
-        <figure alt="Jupiter" class="solar-system__planet jupiter"></figure>
+        <figure alt="Jupiter" class="solar-system__planet solar-system__planet--jupiter"></figure>
 
-        <figure alt="Saturnus" class="solar-system__planet saturn">
-            <div class="saturn-ring"></div>
+        <figure alt="Saturnus" class="solar-system__planet solar-system__planet--saturn">
+            <div class="solar-system__planet--saturn-ring"></div>
         </figure>
 
-        <figure alt="Uranus" class="solar-system__planet uranus"></figure>
+        <figure alt="Uranus" class="solar-system__planet solar-system__planet--uranus"></figure>
 
-        <figure alt="Neptunus" class="solar-system__planet neptune"></figure>
+        <figure alt="Neptunus" class="solar-system__planet solar-system__planet--neptune"></figure>
+       
         
     </main>
 
@@ -51,6 +56,7 @@
 
     </aside>
     <section class="overlay hidden">
+
 
         <header class="overlay__header">
 
@@ -71,23 +77,31 @@
         <section class="overlay__stat-grid">
 
             <section>
+            
                 <h3 class="overlay__section-title">Omkrets</h3>
                 <p class="overlay__pl-circ"></p>
+            
             </section>
 
             <section>
+            
                 <h3 class="overlay__section-title">Km från Solen</h3>
                 <p class="overlay__pl-dist"></p>
+            
             </section>
 
             <section>
+            
                 <h3 class="overlay__section-title">Max temperatur</h3>
                 <p class="overlay__pl-max-temp"></p>
+            
             </section>
 
             <section>
+            
                 <h3 class="overlay__section-title">Min temperatur</h3>
                 <p class="overlay__pl-min-temp"></p>
+            
             </section>
 
         </section>
@@ -95,9 +109,12 @@
         <figure class="overlay__line"></figure>
 
         <section class="overlay__moons">
-                <h3 class="overlay__section-title">Månar</h3>
-                <ul class="overlay__moons-list"></ul>
+        
+            <h3 class="overlay__section-title">Månar</h3>
+            <ul class="overlay__moons-list"></ul>
+
         </section>
+
 
         <aside class="overlay__aside">
 
@@ -110,6 +127,8 @@
             </figure>
     
         </aside>
+
+
     </section>
 </body>
 </html>
