@@ -124,13 +124,13 @@ const displayData = (spaceObject) => {
     }
     
     
-    //Setting the opacity of the
+    //Setting the opacity of the planet slices depending on what space object is displayed
     switch(spaceObject.name) {
         case "Solen":
-            setSliceOpacity(0.9, 0.8, 0.7) //Sun gets a powerful but not solid glow that slightly decreases towards the outer layers
+            setSliceOpacity(0.9, 0.8, 0.75) //Sun gets a powerful but not solid glow that slightly decreases towards the outer layers
             break
         case "Jorden":
-            setSliceOpacity(1, 0.2, 0.1) //Earth gets a solid inner layer and very weak outer ones
+            setSliceOpacity(1, 0.2, 0.1) //Earth gets a solid inner layer and very weak outer ones (representing atmosphere)
             break
         case "Merkurius":
         case "Venus":
@@ -144,26 +144,30 @@ const displayData = (spaceObject) => {
             setSliceOpacity(0.6, 0.4, 0.2) //Gas giants get a see-through inner layer and decreasing outer ones
             break
         default:
-            console.log('Failed to set slice opacity for ' + spaceObject.name);          
+            console.log('Failed to set slice opacity for ' + spaceObject.name); 
     }
     
 
-
+    //After everything's been prepared, we show the overlay
     showOverlay()
 }
+
 
 //Local function only used by displayData
 //Accepts 3 number values between 0 and 1 and sets the opacity of the 3 "slice layers" at the left side of screen to those values
 const setSliceOpacity = (innerValue, middleValue, outerValue) => {
 
-    //Exits the function early if all arguments aren't number values
+    //Exits the function early if all arguments aren't number values, or if the number values are outside of 0-1
     if (![innerValue, middleValue, outerValue].every(value => typeof value == 'number')) {
+    
         console.log('Setting slice opacity failed,', innerValue, middleValue, outerValue, 'are not all number values')
         return   
+    
     } else if (![innerValue, middleValue, outerValue].every(value => value >= 0 && value <= 1)) {
-        //Logs a message if one or more argument was outside the range of 0-1
+
         console.log('Setting slice opacity failed,', innerValue, middleValue, outerValue, 'are not all valid opacity values')
         return
+    
     }
 
     planetSlices.inner.style.opacity = innerValue
@@ -175,4 +179,4 @@ const setSliceOpacity = (innerValue, middleValue, outerValue) => {
 
 
 
-export{setPlanetSizes, displayData, showOverlay, hideOverlay}
+export {setPlanetSizes, showOverlay, hideOverlay, displayData}
