@@ -5,7 +5,8 @@ import { overlay, planetFigures, planetSlices } from "./domElements.js"
 import { getColorVar, stringifyBigNumber } from "./misc.js"
 
 
-//Function that makes the relative sizing of the planet figures true-to-life
+//Function that makes the relative sizing of the planet figures true-to-life 
+//Aka the most overkill thing I've done in my life (but thank god we're prepared if the planets decide to change size)
 const setPlanetSizes = async() => {
 
     //Get array of planets by first getting our solar system array (through api request), then making a "sub-array" excluding the sun
