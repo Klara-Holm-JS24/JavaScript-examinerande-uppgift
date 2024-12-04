@@ -1,4 +1,4 @@
-//Module that handles api requests || Modul för att hantera api requests
+//Module that handles api requests
 
 const baseUrl = "https://n5n3eiyjb0.execute-api.eu-north-1.amazonaws.com"
 
@@ -48,7 +48,5 @@ export const getBody = async(name) => {
 
     const solarSystem = await getSolarSystem()
 
-    //Finds the object in the solar system [] where the name property is == whatever you've ente
     return solarSystem.find(planet => planet.name === name)
-
 }

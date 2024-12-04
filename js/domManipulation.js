@@ -1,4 +1,4 @@
-//Module containing all code that changes the DOM || Modul med all kod som ändrar i DOM-trädet
+//Module containing all code that makes changes in the DOM
 
 import { getSolarSystem } from "./apiRequests.js"
 import { overlay, planetFigures, planetSlices } from "./domElements.js"
