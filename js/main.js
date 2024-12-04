@@ -1,8 +1,8 @@
-//Main js module
+//Main js module, initializes the page and sets eventListeners || Huvudmodul: initierar sidan och hanterar eventlisteners
 
-import {getPlanet} from "./apiRequests.js"
+import {getBody} from "./apiRequests.js"
 import {overlay, planetFigures, sunSlice} from "./domElements.js";
-import {displayPlanetData, hideOverlay, setPlanetSizes} from "./domManipulation.js";
+import {setPlanetSizes, displayData, hideOverlay} from "./domManipulation.js";
 
 
 
@@ -13,16 +13,19 @@ for (const planet of planetFigures) {
     planet.addEventListener('click', async() => {
 
         const planetName = planet.getAttribute('alt')
-        const planetData = await getPlanet(planetName)
+        const planetData = await getBody(planetName)
 
-        displayPlanetData(planetData)
+        displayData(planetData)
         
     })
 }
 
 sunSlice.addEventListener('click', async() => {
-    const sunData = await getPlanet('Solen')
-    displayPlanetData(sunData)
+    
+    const sunData = await getBody('Solen')
+
+    displayData(sunData)
+
 })
 
 

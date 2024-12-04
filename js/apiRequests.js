@@ -1,6 +1,5 @@
 //Module that handles api requests || Modul för att hantera api requests
 
-
 const baseUrl = "https://n5n3eiyjb0.execute-api.eu-north-1.amazonaws.com"
 
 const getApiKey = async() => {
@@ -20,6 +19,7 @@ const getApiKey = async() => {
         console.log(error)
     }
 }
+
 
 const apiKey = await getApiKey()
 
@@ -42,8 +42,13 @@ export const getSolarSystem = async() => {
     }
 }
 
-export const getPlanet = async(name) => {
+
+
+export const getBody = async(name) => {
+
     const solarSystem = await getSolarSystem()
-    console.log(solarSystem)
+
+    //Finds the object in the solar system [] where the name property is == whatever you've ente
     return solarSystem.find(planet => planet.name === name)
+
 }

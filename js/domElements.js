@@ -1,19 +1,21 @@
-//Module containing all DOM elements that we at any point access in our js
+//Module containing all DOM elements that we at any point access in our script
 
 const planetFigures = document.querySelectorAll('.solar-system__planet')
 const sunSlice = document.querySelector('.sun-slice')
 
-//
+
 const overlay = {
     modal: document.querySelector('.overlay'),
     title: document.querySelector('.overlay__title'),
     subTitle: document.querySelector('.overlay__subtitle'),
-    description: document.querySelector('.overlay__pl-desc'),
-    circumference: document.querySelector('.overlay__pl-circ'),
-    distance: document.querySelector('.overlay__pl-dist'),
-    maxTemp: document.querySelector('.overlay__pl-max-temp'),
-    minTemp: document.querySelector('.overlay__pl-min-temp'),
-    moonList: document.querySelector('.overlay__moons-list')        
+    description: document.querySelector('.overlay__p--desc'),
+    circumference: document.querySelector('.overlay__p--circ'),
+    distance: document.querySelector('.overlay__p--dist'),
+    maxTemp: document.querySelector('.overlay__p--max-temp'),
+    maxTempTitle: document.querySelector('.overlay__section-title--max-temp'),
+    minTempTitle: document.querySelector('.overlay__section-title--min-temp'),
+    minTemp: document.querySelector('.overlay__p--min-temp'),
+    moonsList: document.querySelector('.overlay__moons-list')        
 }
 
 const planetSlices = {

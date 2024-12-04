@@ -1,110 +1,178 @@
 //Module containing all code that changes the DOM || Modul med all kod som ändrar i DOM-trädet
 
-import {getSolarSystem } from "./apiRequests.js"
+import { getSolarSystem } from "./apiRequests.js"
 import { overlay, planetFigures, planetSlices } from "./domElements.js"
+import { getColorVar, stringifyBigNumber } from "./misc.js"
 
 
-const displayPlanetData = (planetData) => {    
+//Function that makes the relative sizing of the planet figures true-to-life
+const setPlanetSizes = async() => {
 
-    //Displaying a number of selected planet datapoints to their belonging HTML element
-    overlay.title.textContent = planetData.name
-    overlay.subTitle.textContent = planetData.latinName
+    //Get array of planets by first getting our solar system array (through api request), then making a "sub-array" excluding the sun
+    const solarSystem = await getSolarSystem()
+    const planets = solarSystem.slice(1)
 
-    overlay.description.textContent = planetData.desc
+    //Looping with variables instead of "for of" since we want to simultaneously access the same index of 2 different arrays
+    for (let i = 0; i < planets.length; i++) {
 
-    const circString = stringifyBigNumber(planetData.circumference) + ' km'
-    const distString = stringifyBigNumber(planetData.distance) + ' km'
+        const planetElement = planetFigures[i] //planetFigures imported from domElements.js
+
+        const planetData = planets[i]
+        const planetDiameter = planetData.circumference / Math.PI //Calculates the planet's diameter based on circumference data
+
+        planetElement.style.flex = planetDiameter //Sets the planet's relative size based on its diameter
+    }
+}
+
+
+//Self-explanatory I hope
+const hideOverlay = () => {
+    overlay.modal.classList.add('hidden')
+}
+const showOverlay = () => {
+    overlay.modal.classList.remove('hidden')
+}
+
+
+
+const displayData = (spaceObject) => {   
+
+    console.log('Displaying the data of ' + spaceObject.name);
+    
+
+    //Displaying a number of selected datapoints from the  to their belonging HTML element
+    overlay.title.textContent = spaceObject.name
+    overlay.subTitle.textContent = spaceObject.latinName
+
+    overlay.description.textContent = spaceObject.desc
+
+    const circString = stringifyBigNumber(spaceObject.circumference) + ' km'
+    const distString = stringifyBigNumber(spaceObject.distance) + ' km'
 
     overlay.circumference.textContent = circString
     overlay.distance.textContent = distString
 
-    overlay.maxTemp.textContent = planetData.temp.day + ' °C'
-    overlay.minTemp.textContent = planetData.temp.night + ' °C' 
+    //Sometimes max temperature and min temperature are the same, then we want to show a different stat instead of 2 temps
+    if (spaceObject.temp.day == spaceObject.temp.night) {
 
-    overlay.moonList.innerHTML = ''
+        console.log('Displaying temperature and rotational period since daytime and nighttime temperatures are the same');
+        
 
-    //Adding moon data is a bit more complex, partially because the data is not a string but an array that needs to be turned into list items
-    //Also because SOME astral bodies (*cough* saturn *cough*) apparently have 3 moons named Titan, so would you look at that...
-    //In other words we need to check for doubles and make sure they aren't entered multiple times
+        //Replacing max temperature with temperature
+        overlay.maxTempTitle.textContent = 'Temperatur'
+        overlay.maxTemp.textContent = spaceObject.temp.day + '°C'
 
-    let displayedMoons = []
+        //Replacing the display of min temperature with rotational period
+        overlay.minTempTitle.textContent = 'Rotationstid'
 
-    for (const moon of planetData.moons) {
+        const rotationString = stringifyBigNumber(spaceObject.rotation)  + ' dagar'
+        overlay.minTemp.textContent = rotationString
+        
+    } else {
+
+        //If max and min temp are different they're shown as usual
+
+        console.log('Displaying max and min temperature since daytime and nighttime temperatures differ');
+
+        overlay.maxTempTitle.textContent = 'Max Temperatur'
+        overlay.maxTemp.textContent = spaceObject.temp.day + '°C'
+
+        overlay.minTempTitle.textContent = 'Min Temperatur'
+        overlay.minTemp.textContent = spaceObject.temp.night + '°C' 
+    }
+
+
+
+    //Displaying the space object's moons:
+
+    overlay.moonsList.innerHTML = '' //First empty the current <ul>
+
+    let displayedMoons = [] //Declaring a variable to check for double moons (api returns 3 different "Titan" for Saturn)
+
+    //Iterating through the array of moons that's in the api data
+    for (const moon of spaceObject.moons) {
+
         if (displayedMoons.includes(moon)) {
+
             console.log(`Detected double: multiple items contain ${moon}`)
-            continue //Skips current iteration
+            continue //Skips over 
+
         }
 
+        //Create a <li> element containing name of the current iteration's moon
         const newListItem = document.createElement('li')
         newListItem.textContent = moon
 
-        overlay.moonList.appendChild(newListItem)
+        //Adding that element to the moons <ul>
+        overlay.moonsList.appendChild(newListItem)
    
-        displayedMoons.push(moon)
+        displayedMoons.push(moon) //Once a moon has been added to the html, add it's name to the list that checks doubles
    
     }
 
-    
-    const colorVar = `var(--${planetData.name.toLowerCase()})`
-    
+    //If the space object has no moons to display, a message about the lack of moons is displayed instead
+    if (spaceObject.moons.length == 0) {
+        overlay.moonsList.textContent = `${spaceObject.name} har inga månar.`
+    }
+
+
+    //Setting the background color of all the "planet slices" at the left side of the screen to be the color of the planet
+    const colorVar = getColorVar(spaceObject)
+
     for (const key in planetSlices) {
-        planetSlices[key].style.backgroundColor = colorVar
+        planetSlices[key].style.backgroundColor = `var(${colorVar})`
     }
     
-    if (['Merkurius', 'Venus', 'Mars'].includes(planetData.name)) {
-        planetSlices.outer.style.opacity = 0
-        planetSlices.middle.style.opacity = 0
-    } else {
-        planetSlices.outer.style.opacity = 0.5
-        planetSlices.middle.style.opacity = 0.75
+    
+    //Setting the opacity of the
+    switch(spaceObject.name) {
+        case "Solen":
+            setSliceOpacity(0.9, 0.8, 0.7) //Sun gets a powerful but not solid glow that slightly decreases towards the outer layers
+            break
+        case "Jorden":
+            setSliceOpacity(1, 0.2, 0.1) //Earth gets a solid inner layer and very weak outer ones
+            break
+        case "Merkurius":
+        case "Venus":
+        case "Mars":
+            setSliceOpacity(1, 0, 0) //Rest of the stone planets get a solid inner layer and no outer ones (no atmosphere)
+            break
+        case "Jupiter":
+        case "Saturnus": 
+        case "Uranus":
+        case "Neptunus":
+            setSliceOpacity(0.6, 0.4, 0.2) //Gas giants get a see-through inner layer and decreasing outer ones
+            break
+        default:
+            console.log('Failed to set slice opacity for ' + spaceObject.name);          
     }
-
     
 
 
     showOverlay()
 }
 
-const stringifyBigNumber = (number) => {
-    let returnString = ''
+//Local function only used by displayData
+//Accepts 3 number values between 0 and 1 and sets the opacity of the 3 "slice layers" at the left side of screen to those values
+const setSliceOpacity = (innerValue, middleValue, outerValue) => {
 
-    const numberString = number.toString()
-
-    for (let i = 0; i < numberString.length; i++) {
-        returnString += numberString[i]
-
-        if ((numberString.length - i)%3 == 1 && numberString.length - i != 1) {
-            returnString += ' '
-        } 
+    //Exits the function early if all arguments aren't number values
+    if (![innerValue, middleValue, outerValue].every(value => typeof value == 'number')) {
+        console.log('Setting slice opacity failed,', innerValue, middleValue, outerValue, 'are not all number values')
+        return   
+    } else if (![innerValue, middleValue, outerValue].every(value => value >= 0 && value <= 1)) {
+        //Logs a message if one or more argument was outside the range of 0-1
+        console.log('Setting slice opacity failed,', innerValue, middleValue, outerValue, 'are not all valid opacity values')
+        return
     }
 
-    return returnString
+    planetSlices.inner.style.opacity = innerValue
+    planetSlices.middle.style.opacity = middleValue
+    planetSlices.outer.style.opacity = outerValue
+
+    console.log('Slice opacity was set to', innerValue, middleValue, outerValue)
 }
 
-const setPlanetSizes = async() => {
 
-    //Get array of planets by first getting our solar system array (through api request), then removing it's first item (the sun)
-    const solarSystem = await getSolarSystem()
-    const planets = solarSystem.slice(1)
 
-    //Looping with variables instead of "for of" since we want to access the same index of 2 different arrays
-    for (let i = 0; i < planets.length; i++) {
-
-        const figElement = planetFigures[i] //planetFigures imported from domElements.js
-
-        const planetData = planets[i]
-        const planetDiameter = planetData.circumference / Math.PI
-
-        figElement.style.flex = planetDiameter
-    }
-}
-
-const hideOverlay = () => {
-    overlay.modal.classList.add('hidden')
-}
-
-const showOverlay = () => {
-    overlay.modal.classList.remove('hidden')
-}
-
-export{setPlanetSizes, displayPlanetData, hideOverlay}
+export{setPlanetSizes, displayData, showOverlay, hideOverlay}

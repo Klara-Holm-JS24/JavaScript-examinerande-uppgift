@@ -1,4 +1,4 @@
-//Modal containing 2 functions that don't quite belong in any of the other files but that make the code look a lot cleaner
+//Module containing 2 functions that don't quite belong in any of the other files but that make the code look a lot cleaner
 
 
 //Hopefully self-explanatory, returns the name of a css color var() based on an object's name property
